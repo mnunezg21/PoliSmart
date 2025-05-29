@@ -1,0 +1,267 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3 {
+    color: #6a63f2;
+    margin-bottom: 1rem;
+}
+
+/* Contenedor grid solo 3 filas: header - main - footer */
+#grid-container {
+    display: grid;
+    grid-template-areas:
+        "cabecera"
+        "main"
+        "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    grid-area: cabecera;
+    background: linear-gradient(360deg, #1d3557, #e63946);
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#titulo-cabecera {
+    color: white;
+    margin: 0;
+}
+
+/* Nav igual que en las otras páginas */
+#botonera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    background-color: #f5f5f5;
+    padding: 1rem 0;
+}
+
+#botonera > div {
+    background-color: #e63946;
+    padding: 0.7rem 2rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+#botonera > div a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+#botonera > div:hover {
+    background-color: #d62828;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#botonera > div:active {
+    transform: translateY(2px);
+}
+
+/* Main centrado y con padding */
+#main {
+    grid-area: main;
+    background-color: #ffffff;
+    padding: 2rem;
+    text-align: left;
+    max-width: 900px;
+    margin: 2rem auto;
+    box-shadow: 0 0 10px rgba(106, 99, 242, 0.1);
+    border-radius: 10px;
+}
+
+/* Footer */
+#footer {
+    grid-area: footer;
+    background-color: #1d3557;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Redes sociales */
+#lista-redes {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#lista-redes a {
+    color: white;
+    font-weight: bold;
+}
+
+/* FORMULARIO */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #6a63f2;
+    outline: none;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+input[type="submit"] {
+    background-color: #6a63f2;
+    color: white;
+    font-weight: bold;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: max-content;
+}
+
+input[type="submit"]:hover {
+    background-color: #574fbb;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #botonera > div {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    #main {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    text-align: left;
+}
+
+form input,
+form button,
+form textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+form button[type="submit"] {
+    background-color: #6a63f2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #574bdf;
+}
+
+.info-extra {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.codigo-acceso {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e63946;
+  margin: 1rem 0;
+}
+
+#acceso-usuario {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.boton-usuario {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.boton-usuario:hover {
+  background-color: #000000;
+  color: #ffffff;
+}

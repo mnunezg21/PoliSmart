@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - POLISMART</title>
+  <link rel="stylesheet" href="/css/reservas-contacto.css" />
+</head>
+<body>
+  <div id="grid-container">
+    <header id="cabecera">
+      <h1 id="titulo-cabecera">POLISMART</h1>
+      <nav id="botonera">
+        <div><a href="index.html">- Página Principal -</a></div>
+        <div><a href="instalaciones.html">- Instalaciones -</a></div>
+        <div><a href="reserva.html">- Reservas -</a></div>
+        <div><a href="contacto.html">- Contacto -</a></div>
+      </nav>
+      <div id="acceso-usuario"></div>
+    </header>
+
+    <main id="main">
+      <h2>Contacto</h2>
+      <p>
+        Si tienes alguna duda o quieres hacernos llegar tus comentarios,
+        puedes enviarnos un mensaje con el siguiente formulario:
+      </p>
+
+      <form id="formulario-contacto">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="asunto">Asunto:</label>
+        <input type="text" id="asunto" name="asunto" required />
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+        <input type="submit" value="Enviar mensaje" />
+      </form>
+
+      <p class="info-extra">
+        También puedes escribirnos directamente a:
+        <a href="mailto:contacto@polismart.com">contacto@polismart.com</a>
+        o llamarnos al <strong>+34 912 345 678</strong>.
+      </p>
+    </main>
+
+    <footer id="footer">
+      <p>Síguenos en redes sociales:</p>
+      <ul id="lista-redes">
+        <li><a href="https://www.facebook.com/Polismart">Facebook</a></li>
+        <li><a href="https://www.instagram.com/Polismart">Instagram</a></li>
+        <li><a href="https://twitter.com/Polismart">Twitter</a></li>
+        <li><a href="https://www.youtube.com/@Polismart">YouTube</a></li>
+      </ul>
+      <p>&copy; 2025 POLISMART. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script src="/js/index.js"></script>
+</body>
+</html>

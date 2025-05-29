@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reservas - POLISMART</title>
+  <link rel="stylesheet" href="/css/reservas-contacto.css" />
+</head>
+<body>
+  <div id="grid-container">
+    <header id="cabecera">
+      <h1 id="titulo-cabecera">POLISMART</h1>
+      <nav id="botonera">
+        <div><a href="index.html">- Página Principal -</a></div>
+        <div><a href="instalaciones.html">- Instalaciones -</a></div>
+        <div><a href="reserva.html">- Reservas -</a></div>
+        <div><a href="contacto.html">- Contacto -</a></div>
+      </nav>
+      <div id="acceso-usuario"></div>
+    </header>
+
+    <main id="main">
+      <h2>Formulario de Reservas</h2>
+      <p>Por favor, rellena el formulario para reservar tu espacio o actividad.</p>
+      <form>
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="actividad">Actividad a reservar:</label>
+        <select id="actividad" name="actividad" required>
+          <option value="">-- Selecciona una opción --</option>
+          <option value="piscina">Piscina olímpica</option>
+          <option value="futbol7">Cancha de fútbol 7</option>
+          <option value="gimnasio">Gimnasio</option>
+          <option value="yoga">Salas multiusos (Yoga, Pilates, Zumba)</option>
+          <option value="padel">Pádel / Tenis</option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required />
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" required />
+
+        <label for="comentarios">Comentarios adicionales:</label>
+        <textarea id="comentarios" name="comentarios" placeholder="Escribe aquí cualquier detalle adicional..."></textarea>
+
+        <button id="boton" type="submit"> Enviar Reserva </button>
+      </form>
+    </main>
+
+    <script src="/js/reservas.js"></script>
+
+    <footer id="footer">
+      <p>Síguenos en redes sociales:</p>
+      <ul id="lista-redes">
+        <li><a href="https://www.facebook.com/Polismart" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        <li><a href="https://www.instagram.com/Polismart" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://twitter.com/Polismart" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        <li><a href="https://www.youtube.com/@Polismart" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+      </ul>
+      <p>&copy; 2025 POLISMART. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script src="/js/reservas.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>
