@@ -1,3 +1,6 @@
+// RFID 3.3V - 3.3V | RST - 9 | GND - GND | MISO - 12 |MOSI - 11 | SCK - 13 | SDA - 10 
+// RGB RED - 6 | BLUE - 5 | GREEN - 7 | GND - GND |
+// BUZZER + 4 | - GND
 #include <SPI.h>              // Librería para comunicación SPI (necesaria para el módulo RFID)
 #include <MFRC522.h>          // Librería del lector RFID MFRC522
 
@@ -72,6 +75,7 @@ void setup() {
 }
 
 void loop() {
+  bool acceso=false;
   // Verifica si hay una nueva tarjeta cerca
   if (!mfrc522.PICC_IsNewCardPresent()) return;
   if (!mfrc522.PICC_ReadCardSerial()) return;
@@ -103,15 +107,18 @@ void loop() {
 
     if (pinIngresado == pinesUsuarios[indexUsuario]) {
       Serial.println("✅ PIN correcto. Acceso concedido.");
+      acceso=true;
       setColor(0, 255, 0);
       tone(buzzerPin, 1000);
       delay(500);
       noTone(buzzerPin);
       delay(20);
       setColor(255, 0, 0);
+
       Serial.println("\nAcerque una tarjeta RFID al lector...");
     } else {
       Serial.println("❌ PIN incorrecto. Acceso denegado.");
+      acceso=false;
       setColor(255, 0, 0);
       tone(buzzerPin, 200);
       delay(200);
@@ -137,7 +144,7 @@ void loop() {
     delay(20);
     Serial.println("\nAcerque una tarjeta RFID al lector...");
   }
-
+  httpPostmanControlAcceso(uid, acceso);
   delay(2000);
   setColor(255, 0, 0);           // LED rojo (espera)
   mfrc522.PICC_HaltA();          // Detiene la comunicación con la tarjeta
@@ -175,4 +182,36 @@ String esperarPIN() {
     pin.trim(); 
   }
   return pin;
+}
+
+String uidToString(byte *uid, byte size) {
+  String uidStr = "";
+  for (byte i = 0; i < size; i++) {
+    if (uid[i] < 0x10) uidStr += "0";  // Asegura 2 dígitos
+    uidStr += String(uid[i], HEX);
+  }
+  uidStr.toUpperCase();  // Opcional: para mayúsculas como "BDE59381"
+  return uidStr;
+}
+
+
+void httpPostmanControlAcceso(byte *uid, bool acceso){
+  char server[] = "iota-ul.iotplatform.telefonica.com";
+  int port = 8085; 
+
+  String uidStr = uidToString(uid, 4); 
+  String body = "uid|" + uidStr + "#entra|" + (acceso ? "true" : "false");
+  String url = "/iot/d?k=PruebaUL&i=controlAcceso";
+
+  if (client.connect(server, port)) {
+    client.println("POST " + url + " HTTP/1.1");
+    client.println("Host: iota-ul.iotplatform.telefonica.com");
+    client.println("Content-Type: text/plain");
+    client.print("Content-Length: ");
+    client.println(body.length());
+    client.println();         
+    client.println(body);
+  } else {
+    Serial.println("Fallo en la conexión con el servidor IoT Agent");
+  }
 }

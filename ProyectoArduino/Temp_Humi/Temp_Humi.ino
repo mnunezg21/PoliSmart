@@ -1,3 +1,8 @@
+// TEMP - GND | MID - 5V | S - 10
+// LED TEMP RED - 12 | BLUE - 11
+// Sensor ultrasonido GND - GND | ECHO - 8 | TRIG - 9 | VCC - 5V
+// LED SONIDO 7
+
 #include "DHT.h" // Incluye la librería del sensor DHT
 
 // Define el pin al que está conectado el sensor DHT11
@@ -68,7 +73,6 @@ void loop() {
 
   // Lee la temperatura desde el sensor (en grados Celsius)
   float temperatura = dht.readTemperature();
-
   // Verifica si hubo un error al leer el sensor
   if (isnan(temperatura)) {
     Serial.println("Fallo al leer del sensor DHT!");
@@ -79,6 +83,7 @@ void loop() {
   Serial.print("Temperatura: ");
   Serial.print(temperatura);
   Serial.println(" ºC");
+  httpPostmanTemp(temperatura);
 
   // Si la temperatura es menor o igual a 19 °C, enciende el LED azul
   if (temperatura <= 19) {
@@ -96,6 +101,7 @@ void loop() {
 }
 
 void ultraSonido(){
+  bool activo = false;
   long duracion;
   int distancia;
 
@@ -115,8 +121,61 @@ void ultraSonido(){
   // Si la distancia es menor a 20 cm, se enciende el LED de movimiento
   if (distancia < 20) {
     digitalWrite(ledMov, HIGH); 
+    activo = true;
+    httpPostmanLightSensor(activo);
   } else {
     digitalWrite(ledMov, LOW); 
+    activo = false;
+    httpPostmanLightSensor(activo);
   }
-  delay(1500);
+  delay(3000);
+}
+
+void httpPostmanTemp(int temperatura){
+  char server[] = "iota-ul.iotplatform.telefonica.com";
+  int port = 8085; 
+
+  String body = "temperatureSensor1|" + String(temperatura);
+  String url = "/iot/d?k=PruebaUL&i=temperatureSensor1";
+
+  if (client.connect(server, port)) {
+
+    // Enviar petición HTTP POST
+    client.println("POST " + url + " HTTP/1.1");
+    client.println("Host: iota-ul.iotplatform.telefonica.com");
+    client.println("Content-Type: text/plain");
+    client.print("Content-Length: ");
+    client.println(body.length());
+    client.println();         
+    client.println(body);
+
+    Serial.println();
+    Serial.println("Datos temp");
+  } else {
+    Serial.println("Fallo en la conexión con el servidor IoT Agent");
+  }
+}
+
+void httpPostmanLightSensor(bool activo){
+  char server[] = "iota-ul.iotplatform.telefonica.com";
+  int port = 8085; 
+
+  String body = "Activo|" + (activo ? "true" : "false";
+  String url = "/iot/d?k=PruebaUL&i=lightSensor1";
+
+  if (client.connect(server, port)) {
+
+    // Enviar petición HTTP POST
+    client.println("POST " + url + " HTTP/1.1");
+    client.println("Host: iota-ul.iotplatform.telefonica.com");
+    client.println("Content-Type: text/plain");
+    client.print("Content-Length: ");
+    client.println(body.length());
+    client.println();         
+    client.println(body);
+
+    Serial.println("Datos luz");
+  } else {
+    Serial.println("Fallo en la conexión con el servidor IoT Agent");
+  }
 }
